@@ -169,6 +169,15 @@ body, button, input, textarea { font-family: 'Poppins', sans-serif !important; }
 var TRANSLATIONS = {
 es: {
     subtitle: "Catálogo de perfumes y ropa",
+    welcomeChoice: "¿Ya has comprado con nosotros antes?",
+    welcomeSkip: "Omitir tutorial",
+    welcomeNew: "🆕 Soy nuevo",
+    welcomeReturning: "✅ Ya he comprado",
+    welcomeBack: "← Atrás",
+    welcomeNext: "Siguiente →",
+    welcomeStart: "Empezar a comprar 🛒",
+    welcomeTitle: "¡Hola! Soy Dash 👋",
+    welcomeReplay: "👋 ¿Primera vez aquí? Ver tutorial",
     specialPrice: "💎 Precio súper especial — Escríbenos",
     resaleBtn: "💼 ¿Qué es la reventa?",
     musicPhrase: "🎵 Toca aquí y haz tu pedido con estilo",
@@ -269,6 +278,15 @@ es: {
 },
 en: {
     subtitle: "Perfume and clothing catalog",
+    welcomeChoice: "Have you bought with us before?",
+    welcomeSkip: "Skip tutorial",
+    welcomeNew: "🆕 I'm new",
+    welcomeReturning: "✅ I've bought before",
+    welcomeBack: "← Back",
+    welcomeNext: "Next →",
+    welcomeStart: "Start shopping 🛒",
+    welcomeTitle: "Hi! I'm Dash 👋",
+    welcomeReplay: "👋 First time here? See tutorial",
     specialPrice: "💎 Super special price — Message us",
     resaleBtn: "💼 What is resale?",
     musicPhrase: "🎵 Tap here and place your order in style",
@@ -584,6 +602,7 @@ html { -webkit-text-size-adjust: 100%; }
 <h1>@rgxbm_ressellz7</h1>
 <div class="sub" data-i18n="subtitle">Catálogo de perfumes y ropa</div>
 <div class="loc">📍 Rockland, NY<br>Pick ups / Shipping Available 📦</div>
+<div style="text-align:center;margin:10px 0;"><button onclick="openRgWelcome(true)" style="background:#1a1a1a;border:2px solid #c9a227;color:#f5d76e;padding:10px 18px;border-radius:20px;font-weight:800;font-size:14px;cursor:pointer;" data-i18n="welcomeReplay">👋 ¿Primera vez aquí? Ver tutorial</button></div>
 
 <div class="rg-marquee"><div class="rg-marquee-track"><span data-i18n="marqueeText">✦ ENVÍOS A TODO USA ✦ NUEVOS PRODUCTOS CADA SEMANA ✦ RG RESELL ✦</span><span data-i18n="marqueeText">✦ ENVÍOS A TODO USA ✦ NUEVOS PRODUCTOS CADA SEMANA ✦ RG RESELL ✦</span></div></div>
 <!-- Daily Deal - LV Wallet -->
@@ -4278,6 +4297,110 @@ try{
 
 <script>
 try { if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(function() {}); } } catch(e) {}
+</script>
+<div id="rgWelcome" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99998;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;">
+<div style="background:#1a1a1a;border:2px solid #c9a227;border-radius:20px;max-width:360px;width:100%;padding:24px;text-align:center;box-sizing:border-box;">
+<div style="font-size:56px;">🤖</div>
+<div style="color:#f5d76e;font-size:20px;font-weight:900;margin:8px 0;" data-i18n="welcomeTitle">¡Hola! Soy Dash 👋</div>
+<div id="rgWelcomeText" style="color:#fff;font-size:15px;line-height:1.6;" data-i18n="welcomeChoice">¿Ya has comprado con nosotros antes?</div>
+<div id="rgWelcomeChoiceBtns" style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+<button onclick="rgStartTutorial()" style="background:linear-gradient(180deg,#f5d76e,#c9a227);color:#111;border:none;padding:14px;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer;" data-i18n="welcomeNew">🆕 Soy nuevo</button>
+<button onclick="rgCloseWelcome()" style="background:#222;border:2px solid #555;color:#fff;padding:14px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer;" data-i18n="welcomeReturning">✅ Ya he comprado</button>
+</div>
+<div id="rgWelcomeSteps" style="display:none;margin-top:16px;">
+<div id="rgWelcomeStepText" style="color:#fff;font-size:15px;line-height:1.6;min-height:80px;"></div>
+<div style="display:flex;gap:10px;margin-top:16px;">
+<button onclick="rgWelcomeBack()" style="background:#222;border:2px solid #555;color:#fff;padding:12px 16px;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;" data-i18n="welcomeBack">← Atrás</button>
+<button onclick="rgWelcomeNext()" id="rgWelcomeNextBtn" style="flex:1;background:linear-gradient(180deg,#f5d76e,#c9a227);color:#111;border:none;padding:12px;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer;" data-i18n="welcomeNext">Siguiente →</button>
+</div>
+</div>
+<button onclick="rgCloseWelcome()" style="background:none;border:none;color:#888;font-size:13px;margin-top:14px;cursor:pointer;width:100%;padding:8px;" data-i18n="welcomeSkip">Omitir tutorial</button>
+</div>
+</div>
+<script>
+var rgTutorialStep = 0;
+var rgTutorialSteps = [
+  {es: "1️⃣ Elige tu producto. Busca en Haz tu pedido, usa el buscador y los filtros por Hombre, Mujer o Ropa.", en: "1️⃣ Pick your product. Browse Haz tu pedido, use search and filters for Men, Women or Clothing."},
+  {es: "2️⃣ Agrégalo al carrito. Toca AGREGAR en el producto que te guste. Puedes agregar varios.", en: "2️⃣ Add it to the cart. Tap ADD on the product you like. You can add several."},
+  {es: "3️⃣ Envía tu pedido por WhatsApp. En el carrito, escribe solo tu nombre y envía tu pedido. Te contactamos para confirmar.", en: "3️⃣ Send your order via WhatsApp. In the cart, write just your name and send your order. We contact you to confirm."},
+  {es: "4️⃣ Confirmamos contigo antes de pagar. Confirmamos disponibilidad antes de pagar. Pago por Zelle o Cash App, envíos a todo USA y pickups en Rockland, NY.", en: "4️⃣ We confirm with you before you pay. We confirm availability before you pay. Pay with Zelle or Cash App, shipping all over USA and pickups in Rockland, NY."},
+  {es: "🎉 ¡Listo! Ya sabes cómo pedir. Toca Empezar a comprar y elige tus favoritos.", en: "🎉 Done! Now you know how to order. Tap Start shopping and pick your favorites."}
+];
+function rgShowWelcomeStep() {
+  try {
+    var lang = (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'en' : 'es';
+    var el = document.getElementById('rgWelcomeStepText');
+    if (el) el.textContent = rgTutorialSteps[rgTutorialStep][lang];
+    var nextBtn = document.getElementById('rgWelcomeNextBtn');
+    if (nextBtn) nextBtn.textContent = (rgTutorialStep >= rgTutorialSteps.length - 1) ? (lang === 'en' ? 'Start shopping 🛒' : 'Empezar a comprar 🛒') : (lang === 'en' ? 'Next →' : 'Siguiente →');
+  } catch(e) {}
+}
+function openRgWelcome(replay) {
+  try {
+    var w = document.getElementById('rgWelcome');
+    if (!w) return;
+    document.getElementById('rgWelcomeChoiceBtns').style.display = 'flex';
+    document.getElementById('rgWelcomeSteps').style.display = 'none';
+    var t = document.getElementById('rgWelcomeText');
+    if (t) t.style.display = 'block';
+    w.style.display = 'flex';
+  } catch(e) {}
+}
+function rgStartTutorial() {
+  try {
+    rgTutorialStep = 0;
+    document.getElementById('rgWelcomeChoiceBtns').style.display = 'none';
+    document.getElementById('rgWelcomeText').style.display = 'none';
+    document.getElementById('rgWelcomeSteps').style.display = 'block';
+    rgShowWelcomeStep();
+  } catch(e) {}
+}
+function rgWelcomeNext() {
+  try {
+    if (rgTutorialStep >= rgTutorialSteps.length - 1) {
+      rgCloseWelcome();
+      rgGoPedido();
+      return;
+    }
+    rgTutorialStep++;
+    rgShowWelcomeStep();
+  } catch(e) {}
+}
+function rgWelcomeBack() {
+  try {
+    if (rgTutorialStep <= 0) {
+      document.getElementById('rgWelcomeSteps').style.display = 'none';
+      document.getElementById('rgWelcomeChoiceBtns').style.display = 'flex';
+      document.getElementById('rgWelcomeText').style.display = 'block';
+      return;
+    }
+    rgTutorialStep--;
+    rgShowWelcomeStep();
+  } catch(e) {}
+}
+function rgCloseWelcome() {
+  try {
+    var w = document.getElementById('rgWelcome');
+    if (w) w.style.display = 'none';
+  } catch(e) {}
+  try { localStorage.setItem('rg_welcome_seen', '1'); } catch(e) {}
+}
+function rgGoPedido() {
+  try {
+    document.getElementById('tab-inicio').style.display = 'none';
+    document.getElementById('tab-pedido').style.display = 'block';
+    document.getElementById('tab-negocio').style.display = 'none';
+    var b = document.querySelectorAll('.rg-tabbtn');
+    for (var i = 0; i < b.length; i++) b[i].classList.remove('active');
+    if (b[1]) b[1].classList.add('active');
+    window.scrollTo(0, 0);
+  } catch(e) {}
+}
+try {
+  if (!localStorage.getItem('rg_welcome_seen')) {
+    setTimeout(function() { openRgWelcome(false); }, 2600);
+  }
+} catch(e) {}
 </script>
 </body>
 </html data-i18n="viewOrder">
