@@ -7,6 +7,15 @@
      Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo — @rgxbm_ressellz7</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#c9a227">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RG Resell">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d0d0f;color:#f5f0e6;font-family:-apple-system,system-ui,sans-serif;padding-bottom:100px}
@@ -4265,5 +4274,8 @@ try{
 }catch(e){}
 </script>
 
+<script>
+try { if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(function() {}); } } catch(e) {}
+</script>
 </body>
 </html data-i18n="viewOrder">
