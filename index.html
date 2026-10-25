@@ -3715,7 +3715,7 @@ function shareProduct(productId) {
     var msg = '¡Mira este producto de RG Resell!\n\n';
     msg += (p.brand || '') + ' ' + (p.name || '') + '\n';
     if (p.size) msg += p.size + '\n';
-    msg += '\nCatálogo: https://rgressell7.netlify.app';
+    msg += '\nCatálogo: https://rgressell7.vercel.app';
     var url = 'https://wa.me/?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
 }
@@ -4135,8 +4135,8 @@ try{
 <div class="sheet" style="background:#fff;border:1px solid #c9a227;text-align:center;max-width:320px;">
 <h3 style="color:#111;text-align:center;margin-bottom:6px;" data-i18n="qrTitle">📲 Comparte RG</h3>
 <div style="color:#555;font-size:13px;margin-bottom:12px;" data-i18n="qrSub">Escanea y entra directo al catálogo</div>
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAADK0lEQVR4nO2cwW3cMBBF30QEfKSAFOBSpA5SUpCS3IFYigswIB0NUPg5kNRqfXLgRLvRDg8CuNgHD4HxF+cPuSb+eKRvf86AQw455JBDDjl0TsjqCJTHuJjZuARI/WplamZm403Cc+h4aJAkzcCgjH49ZzQBsDwJ6CRJuoaOC8+h46FlE4AlwDAD6TljI6sBFPG4WXgOHQaFD3Ol54wR3zAiMLz0iOVW4Tl0B9BixjCD9GoGUbLx3/wlh+4RahoRBSxgxBmDThBzIPVz0Yi9k3Xna3LoL0DJzMx6YHgNwBKwcXkSw2vARtZSatwqPIeO1oi9AMR3U+q7sqNQ6juqgtwiPIcOhyhlZSk85/KugFJuzvVRvzdTq9Tpztfk0FegmhFTzGiKUnUholQ9CmU00UkTnTwjzg81jZBUXIhhpuQGm1BAyZfc0ufO1+TQVyBqMqhqBIPag4soRNXccI04PdR2lst3wRIyLN+zknUZ4puRDCCCDVNuO9A7X5NDX4E2jWibCc0AsSpDFQ86XRTENeLU0FZ9rkEsTzKisOHFanOjiEd8Mw3zGlwjzg/t+ho2aDWGF9s+WYNSj0EE0tjJhunY8By6EVT8SZYA0In0rDK1n6oVqf3Uu3uWDwBtGrFaa2RgDNMalPouG6wBqIck7OjwHDocahYDnfaeZdtZlk2llIuj6X7E+aFdrdHyINeDVMWuLFPp8mXPiFNDO41oHlS1JuHqs52z7RlxZqhpxJYM067JVf3sljR4p+sBoC0j2rT0vICyoyi9jqYR/tY4P3R1hoo1UGwqukz6UY5dFl9KaQz58PAcOhy6crG31lYZc7cTjyoZrhFnh3bd8Mt+ElrNeckSz4gHgba6AqA0tPZ1RdtM7IsQz4hHgMq7YoZ2g2c1/epXq852zJAsYONtwnPoeKjd6bIR6ruCrQeezKwWHDcKz6FbQp1Ifb3bVw/rx9r4qmXp/7cmhz49Pt7yY3jpjdraAtKPd4MlZKW+8+rzAaCPd7qu7m+tAWI5T2N+p+uxoMudLqJk1q9mYzmTD2b2JIh+PuIRoKv//U8O/2UyhxxyyCGHHHII4DdK5XObb9/nBAAAAABJRU5ErkJggg==" alt="QR RG Resell" style="width:220px;height:220px;image-rendering:pixelated;border-radius:12px;display:block;margin:0 auto;">
-<div style="color:#111;font-weight:700;font-size:14px;margin-top:12px;">rgressell7.netlify.app</div>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACAklEQVR42u2bS47EIAxEreEAHClX50g5ABITMP7Qu17NVFQsoiaxepGn8pfI+Go1oT3taf+f7G/Z6xpdRqt9/kd/9s8vue4y7Hl57H/ku0X7v7WffIuyfliK4n4gT/Z13hv7onbkC8l3iXNp1aS7tG1PJ3h9Sr7wfE3E6p/3A/J9Bd9DsB51yfct8XeynEmWBmHTNOMvNl/Pn28Hel6YPyPzTcuqohR6P+opvk9EvssrK9B8z5Lotu5W8oX1zxp1rTTSTCuj7cL4C6vfo2G1L67f+WuFXvIF98+5iRWuufbdziJfYP028SJYVWud6OYxuTF/xq1/W0RYQxtBmPUvfn/j9gx5CbZ6E9riL/tX0P2N8MW1S+De22FBmHxB6yNvTWouZfWvQWZ/Azp/tlq32MA3TYKjJqZ/xq2PYmAUgk18O+dH0HwlKtw4upG27F+9IP56QiVi5XBqPTP+ouvXVWtAz5qY/Q1Y/VpDw85fxejoLIzJFzp/VpmKRDtaqY7Y8n1i9jekpCQrtpZYF8ZfaP3q8qnvuOM4pXcv6Z+R9StpoJDOdFx3PlhJvoh8j+8XtKERnQ4pI45Tki8mX9mj355mgYcV4+9L+O7vF/zMzhXS5fwIne/n9wsl+WfmV/jx1wvePdU36bL+fUf+PCK12lMjq494fvIN9S+/f6c97aHsfwF6S4o2DnavcAAAAABJRU5ErkJggg==" alt="QR RG Resell" style="width:220px;height:220px;image-rendering:pixelated;border-radius:12px;display:block;margin:0 auto;">
+<div style="color:#111;font-weight:700;font-size:14px;margin-top:12px;">rgressell7.vercel.app</div>
 <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
 <button onclick="shareQr()" style="background:linear-gradient(180deg,#f5d76e,#c9a227);color:#111;border:none;padding:10px 18px;border-radius:10px;font-weight:900;font-size:14px;cursor:pointer;" data-i18n="qrShare">Compartir</button>
 <button onclick="copyQrLink()" style="background:#111;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;" data-i18n="qrCopy">Copiar link</button>
@@ -4156,9 +4156,9 @@ function closeQrModal() {
 function shareQr() {
     try{
         if(navigator.share){
-            navigator.share({title:'RG Resell', text:'Catálogo RG Resell', url:'https://rgressell7.netlify.app'}).catch(function(){});
+            navigator.share({title:'RG Resell', text:'Catálogo RG Resell', url:'https://rgressell7.vercel.app'}).catch(function(){});
         } else {
-            window.open('https://wa.me/?text=' + encodeURIComponent('Mira el catálogo de RG Resell https://rgressell7.netlify.app'), '_blank');
+            window.open('https://wa.me/?text=' + encodeURIComponent('Mira el catálogo de RG Resell https://rgressell7.vercel.app'), '_blank');
         }
     }catch(e){}
 }
@@ -4168,9 +4168,9 @@ function copyQrLink() {
     var _msg = (_lang === 'en' ? 'Link copied' : 'Link copiado');
     try{
         if(navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText('https://rgressell7.netlify.app').then(function(){ alert(_msg); }).catch(function(){});
+            navigator.clipboard.writeText('https://rgressell7.vercel.app').then(function(){ alert(_msg); }).catch(function(){});
         } else {
-            var t = document.createElement('textarea'); t.value = 'https://rgressell7.netlify.app'; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); alert(_msg);
+            var t = document.createElement('textarea'); t.value = 'https://rgressell7.vercel.app'; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); alert(_msg);
         }
     }catch(e){}
 }
