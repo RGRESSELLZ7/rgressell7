@@ -285,7 +285,8 @@ es: {
     featuredProduct: "Producto Destacado",
     clickToSee: "👆 Haz click para ver",
     storyBtn: "💪 Mi Historia",
-    calcBtn: "💰 ¿Cuánto puedo ganar?",      getItTitle: "🔍 ¿No está el tuyo? Te lo conseguimos",     getItSub: "Dinos qué perfume buscas y te confirmamos precio y disponibilidad por WhatsApp.",     getItPh: "¿Qué perfume buscas?",     getItBtn: "Pedirlo por WhatsApp",     getItEmpty: "⚠️ Escribe primero qué perfume buscas.",     getItHint: "Aquí no mostramos precios: te lo confirmamos por WhatsApp antes de pagar.",     noteTitle: "Busca por nota",     noteAll: "Todas",     noteDulce: "Dulce",     noteFresco: "Fresco",     noteIntenso: "Intenso",     noteCitrico: "Cítrico",     noteFrutal: "Frutal",     noteFloral: "Floral",     noteAmaderado: "Amaderado",     noteVainilla: "Vainilla",     noteEspeciado: "Especiado",     noteAmbar: "Ámbar",     searchWholesalePh: "🔍 Buscar perfume mayoreo o marca...",
+    calcBtn: "💰 ¿Cuánto puedo ganar?",      getItTitle: "🔍 ¿No está el tuyo? Te lo conseguimos",     getItSub: "Dinos qué perfume buscas y te confirmamos precio y disponibilidad por WhatsApp.",     getItPh: "¿Qué perfume buscas?",     getItBtn: "Pedirlo por WhatsApp",     getItEmpty: "⚠️ Escribe primero qué perfume buscas.",     getItHint: "Aquí no mostramos precios: te lo confirmamos por WhatsApp antes de pagar.",     noteTitle: "Busca por nota",     noteAll: "Todas",     noteDulce: "Dulce",     noteFresco: "Fresco",     noteIntenso: "Intenso",     noteCitrico: "Cítrico",     noteFrutal: "Frutal",     noteFloral: "Floral",     noteAmaderado: "Amaderado",     noteVainilla: "Vainilla",     noteEspeciado: "Especiado",     noteAmbar: "Ámbar",     demoBanner: "🧪 DEMO — Página de ejemplo para revisar, no es la página principal",
+    searchWholesalePh: "🔍 Buscar perfume mayoreo o marca...",
 },
 en: {
     subtitle: "Perfume and clothing catalog",
@@ -405,7 +406,8 @@ en: {
     featuredProduct: "Featured Product",
     clickToSee: "👆 Click to see",
     storyBtn: "💪 My Story",
-    calcBtn: "💰 How much can I earn?",      getItTitle: "🔍 Can't find yours? We'll get it for you",     getItSub: "Tell us which perfume you're looking for and we'll confirm price and availability on WhatsApp.",     getItPh: "Which perfume are you looking for?",     getItBtn: "Order it on WhatsApp",     getItEmpty: "⚠️ First write which perfume you're looking for.",     getItHint: "No prices are shown here: we'll confirm them on WhatsApp before you pay.",     noteTitle: "Search by note",     noteAll: "All",     noteDulce: "Sweet",     noteFresco: "Fresh",     noteIntenso: "Intense",     noteCitrico: "Citrus",     noteFrutal: "Fruity",     noteFloral: "Floral",     noteAmaderado: "Woody",     noteVainilla: "Vanilla",     noteEspeciado: "Spicy",     noteAmbar: "Amber",     searchWholesalePh: "🔍 Search wholesale perfume or brand...",
+    calcBtn: "💰 How much can I earn?",      getItTitle: "🔍 Can't find yours? We'll get it for you",     getItSub: "Tell us which perfume you're looking for and we'll confirm price and availability on WhatsApp.",     getItPh: "Which perfume are you looking for?",     getItBtn: "Order it on WhatsApp",     getItEmpty: "⚠️ First write which perfume you're looking for.",     getItHint: "No prices are shown here: we'll confirm them on WhatsApp before you pay.",     noteTitle: "Search by note",     noteAll: "All",     noteDulce: "Sweet",     noteFresco: "Fresh",     noteIntenso: "Intense",     noteCitrico: "Citrus",     noteFrutal: "Fruity",     noteFloral: "Floral",     noteAmaderado: "Woody",     noteVainilla: "Vanilla",     noteEspeciado: "Spicy",     noteAmbar: "Amber",     demoBanner: "🧪 DEMO — Example page for review, not the main page",
+    searchWholesalePh: "🔍 Search wholesale perfume or brand...",
 }
 };
 
@@ -4682,7 +4684,7 @@ function rgTourElevate(el) {
     rgTourSaveStyle(el); el.style.position = 'relative'; el.style.zIndex = '99995';
     var a = el.parentNode;
     while (a && a !== document.body) {
-      if (a.id === 'cartbar' || (a.classList && a.classList.contains('modal'))) { rgTourSaveStyle(a); a.style.zIndex = '99996'; break; }
+      if (a.id === 'cartbar' || (a.classList && (a.classList.contains('modal') || a.classList.contains('rg-tabbar')))) { rgTourSaveStyle(a); a.style.zIndex = '99996'; break; }
       a = a.parentNode;
     }
   } catch(e) {}
@@ -4696,6 +4698,11 @@ function rgTourPlaceTip() {
     var th = tip.offsetHeight || 180; var cx = r.left + r.width / 2;
     var left = Math.max(16, Math.min(cx - tw / 2, vw - tw - 16));
     var aleft = Math.max(8, Math.min(cx - 22, vw - 52));
+    if (rgTourStep === 4) {
+      tip.style.left = left + 'px'; tip.style.transform = 'none'; tip.style.top = '12px'; tip.style.bottom = 'auto';
+      if (arrow) arrow.style.display = 'none';
+      return;
+    }
     var below = (r.bottom + 52 + th + 16 <= vh); var above = (r.top - 52 - th - 16 >= 0);
     if (below) {
       tip.style.left = left + 'px'; tip.style.transform = 'none'; tip.style.top = (r.bottom + 52) + 'px'; tip.style.bottom = 'auto';
@@ -4703,8 +4710,11 @@ function rgTourPlaceTip() {
     } else if (above) {
       tip.style.left = left + 'px'; tip.style.transform = 'none'; tip.style.top = (r.top - th - 52) + 'px'; tip.style.bottom = 'auto';
       if (arrow) { arrow.textContent = '▼'; arrow.style.display = 'block'; arrow.style.left = aleft + 'px'; arrow.style.top = (r.top - 46) + 'px'; }
+    } else if (r.top > 60) {
+      tip.style.left = left + 'px'; tip.style.transform = 'none'; tip.style.top = Math.max(8, r.top - th - 44) + 'px'; tip.style.bottom = 'auto';
+      if (arrow) { arrow.textContent = '▼'; arrow.style.display = 'block'; arrow.style.left = aleft + 'px'; arrow.style.top = Math.max(8, r.top - 40) + 'px'; }
     } else {
-      tip.style.left = '50%'; tip.style.transform = 'translateX(-50%)'; tip.style.top = 'auto'; tip.style.bottom = '120px';
+      tip.style.left = left + 'px'; tip.style.transform = 'none'; tip.style.top = 'auto'; tip.style.bottom = '120px';
       if (arrow) { arrow.textContent = '▼'; arrow.style.display = 'block'; arrow.style.left = aleft + 'px'; arrow.style.top = Math.max(8, r.top - 46) + 'px'; }
     }
   } catch(e) {}
@@ -4714,8 +4724,8 @@ window.addEventListener('scroll', rgTourPlaceSoon, true);
 window.addEventListener('resize', rgTourPlaceSoon);
 function rgTourLang() { try { return (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'en' : 'es'; } catch(e) { return 'es'; } }
 function rgTourText(step) {
-  var es = ["Paso 1: Toca HAZ TU PEDIDO 👆", "Paso 2: Toca el botón AGREGAR del primer producto 👆", "Paso 3: Toca Ver pedido para revisar tu orden 👆", "Paso 4: Escribe solo tu nombre y toca Enviar por WhatsApp. Nosotros confirmamos contigo antes de pagar ✅"];
-  var en = ["Step 1: Tap HAZ TU PEDIDO 👆", "Step 2: Tap the ADD button on the first product 👆", "Step 3: Tap Ver pedido to review your order 👆", "Step 4: Write just your name and tap Send via WhatsApp. We confirm with you before you pay ✅"];
+  var es = ["Paso 1: Toca HAZ TU PEDIDO 👆", "Paso 2: Toca el botón AGREGAR del primer producto 👆", "Paso 3: Toca Ver pedido para revisar tu orden 👆", "Paso 4: Escribe solo tu nombre aquí. Para terminar esta práctica, toca el botón dorado 'Terminar tutorial' en este cuadro. Nosotros confirmamos contigo antes de pagar ✅"];
+  var en = ["Step 1: Tap HAZ TU PEDIDO 👆", "Step 2: Tap the ADD button on the first product 👆", "Step 3: Tap Ver pedido to review your order 👆", "Step 4: Write just your name here. To finish this practice, tap the gold 'Terminar tutorial' button in this box. We confirm with you before you pay ✅"];
   return (rgTourLang() === 'en' ? en : es)[step - 1];
 }
 function rgTourClear() {
@@ -4741,7 +4751,7 @@ function rgTourShow(step, el, text, cardEl) {
     var dots = document.getElementById('rgTourDots');
     if (dots) { var ds = ''; for (var di = 1; di <= 4; di++) ds += (di === step ? '●' : '○') + ' '; dots.textContent = ds; }
     var hint = document.getElementById('rgTourHint');
-    if (hint) hint.textContent = (rgTourLang() === 'en' ? '👉 Tap the glowing gold button' : '👉 Toca el botón dorado que brilla');
+    if (hint) hint.textContent = (step === 4) ? (rgTourLang() === 'en' ? '👉 Write your name, then tap \'Terminar tutorial\'' : '👉 Escribe tu nombre y luego toca \'Terminar tutorial\'') : (rgTourLang() === 'en' ? '👉 Tap the glowing gold button' : '👉 Toca el botón dorado que brilla');
     var f = document.getElementById('rgTourFinishBtn');
     if (f) f.style.display = (step === 4) ? 'block' : 'none';
     var dim = document.getElementById('rgTourDim');
